@@ -65,6 +65,12 @@ const paystackCallback = async (reference) => {
     );
     paymentData.payments[paymentIndex].status = status;
 
+    await fs.writeFile(
+      paymentDataFilePath,
+      `exports.paymentData = ${JSON.stringify(paymentData, null, 2)}`,
+      'utf-8'
+  );
+
     if (status == 'success') {
         const bookingIndex = bookingData.bookings.findIndex(
             (booking) => booking.id === existingPayment.booking
@@ -75,13 +81,9 @@ const paystackCallback = async (reference) => {
             `exports.bookingData = ${JSON.stringify(bookingData, null, 2)}`,
             'utf-8'
         );
-    }
 
-    await fs.writeFile(
-        paymentDataFilePath,
-        `exports.paymentData = ${JSON.stringify(paymentData, null, 2)}`,
-        'utf-8'
-    );
+        return "Payment successful. Thanks for booking your flight with us.";
+    }
 
     return { status, reference };
 };

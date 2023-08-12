@@ -13,8 +13,6 @@ The main functionalities of the backend application should include:
 ## Built With
 - Node
 - Express
-- MongoDB
-- Mongoose
 - Paystack
 
 
@@ -50,6 +48,9 @@ yarn run dev
 
 yarn run start
 # will run the server with node
+
+yarn run test
+# will run the test cases in the tests folder
 ```
 
 Thanks
