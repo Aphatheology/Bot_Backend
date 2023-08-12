@@ -1,5 +1,7 @@
 const fs = require('fs').promises;
 const uuid = require('uuid');
+const httpStatus = require("http-status");
+const ApiError = require("../utils/ApiError");
 const flightData = require('../flights/flight.data');
 const { bookingData } = require('./booking.data');
 
@@ -11,7 +13,7 @@ const createBooking = async (flightCode, reqBody) => {
     );
 
     if (!selectedFlight) {
-        throw new Error(`No flight found with code: ${flightCode}`);
+      throw new ApiError(httpStatus.NOT_FOUND, `No flight found with code: ${flightCode}`);
     }
 
     reqBody.status = 'UNPAID';
