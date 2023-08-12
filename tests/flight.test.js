@@ -1,9 +1,15 @@
 require('dotenv').config();
 
-const request = require('supertest');
 const server = require('../server');
+const request = require('supertest');
 
 describe('GET /flight/available-flights', () => {
+    afterAll(async () => {
+        if (server) {
+            server.close();
+        }
+    });
+
     it('should return available flights matching query', async () => {
         const query = {
             departure: 'Lagos',

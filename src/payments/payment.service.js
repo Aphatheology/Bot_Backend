@@ -72,7 +72,7 @@ const paystackCallback = async (reference) => {
         bookingData.bookings[bookingIndex].status = 'PAID';
         await fs.writeFile(
             bookingDataFilePath,
-            `exports.paymentData = ${JSON.stringify(bookingData, null, 2)}`,
+            `exports.bookingData = ${JSON.stringify(bookingData, null, 2)}`,
             'utf-8'
         );
     }
