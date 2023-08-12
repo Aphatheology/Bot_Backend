@@ -9,9 +9,6 @@ const envVarsSchema = Joi.object()
     NODE_ENV: Joi.string().valid('production', 'development', 'test').required(),
     PAYSTACK_SECRET: Joi.string().required(),
     PORT: Joi.string().default(3000),
-    MONGO_URL: Joi.string().required(),
-    JWT_SECRET: Joi.string().required(),
-    JWT_EXPIRES_IN_MINUTES: Joi.string().required(),
   })
   .unknown();
 
@@ -24,10 +21,5 @@ if (error) {
 module.exports = {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
-  mongoUrl: envVars.MONGO_URL,
-  jwt: {
-    secret: envVars.JWT_SECRET,
-    expireInMinute: envVars.JWT_EXPIRES_IN_MINUTES,
-  },
   paystackSecret: envVars.PAYSTACK_SECRET
 };

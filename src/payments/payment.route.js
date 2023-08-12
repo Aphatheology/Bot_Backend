@@ -1,5 +1,4 @@
 const express = require('express');
-const auth = require('../middleware/auth');
 const validate = require('../middleware/validate');
 const router = express.Router();
 const paymentController = require('./payment.controller');
@@ -9,8 +8,6 @@ router.route('/').get(
     validate(paymentValidation.verifyPayment),
     paymentController.paystackCallback
 );
-
-router.route('/webhook').get(paymentController.webhook);
 
 router
     .route('/:bookingId')

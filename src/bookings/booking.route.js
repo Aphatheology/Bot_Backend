@@ -5,10 +5,12 @@ const bookingController = require('./booking.controller');
 const bookingValidation = require('./booking.validation');
 
 router
-    .route('/:id')
+    .route('/:flightCode')
     .post(
         validate(bookingValidation.createBooking),
         bookingController.createBooking
     );
+
+router.route('/').get(bookingController.getAllBookings);
 
 module.exports = router;

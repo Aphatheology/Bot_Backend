@@ -3,7 +3,7 @@ const paymentService = require('./payment.service');
 const catchAsync = require('../utils/catchAsync');
 
 const initPayment = catchAsync(async (req, res) => {
-    const payment = await paymentService.initPayment(req.params.bookingId, req.body);
+    const payment = await paymentService.initPayment(req.params.bookingId);
     res.status(httpStatus.CREATED).send(payment);
 });
 

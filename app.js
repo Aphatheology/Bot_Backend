@@ -5,9 +5,9 @@ const passport = require("passport");
 const { errorConverter, errorHandler } = require("./src/middleware/error");
 const paymentRoute = require("./src/payments/payment.route");
 const flightRoute = require("./src/flights/flight.route");
-require("./src/config/passport");
+// require("./src/config/passport");
 const bookingRoute = require("./src/bookings/booking.route");
-require("./src/config/passport");
+// require("./src/config/passport");
 
 const app = express();
 
@@ -16,9 +16,9 @@ if (config.env !== "test") {
     app.use(morgan.errorHandler);
 }
 app.use(express.json());
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
-app.use("/payment", paymentRoute);
+app.use("/transact", paymentRoute);
 app.use("/flight", flightRoute);
 app.use("/booking", bookingRoute);
 

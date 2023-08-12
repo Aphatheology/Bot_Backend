@@ -1,0 +1,3 @@
+exports.paymentData = {
+    bookings: [],
+};

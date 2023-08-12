@@ -1,15 +1,4 @@
-const Flight = require('./flight.model');
-
-const createSingleFlight = async (reqBody) => {
-    const flight = await Flight.create(reqBody);
-    return flight;
-};
-
-const createMultipleFlights = async (reqBody) => {
-    const flights = await Flight.insertMany(reqBody);
-
-    return flights;
-};
+const flightData = require('./flight.data');
 
 const getAvailableFlights = async (reqQuery) => {
     const userDate = new Date(reqQuery.date);
@@ -19,26 +8,28 @@ const getAvailableFlights = async (reqQuery) => {
     const endDate = new Date(userDate);
     endDate.setHours(23, 59, 59, 999);
 
-    const query = {
-        departure: { $regex: new RegExp(reqQuery.departure, 'i') },
-        destination: { $regex: new RegExp(reqQuery.destination, 'i') },
-        date: { $gte: startDate, $lte: endDate },
-    };
-
-    const availableFlights = await Flight.find(query);
+    const availableFlights = flightData.filter((flight) => {
+        const flightDate = new Date(flight.date);
+        return (
+            flight.departure
+                .toLowerCase()
+                .includes(reqQuery.departure.toLowerCase()) &&
+            flight.destination
+                .toLowerCase()
+                .includes(reqQuery.destination.toLowerCase()) &&
+            flightDate >= startDate &&
+            flightDate <= endDate
+        );
+    });
 
     return availableFlights;
 };
 
 const getAllFlights = async () => {
-    const allFlights = await Flight.find();
-
-    return allFlights;
+    return flightData;
 };
 
 module.exports = {
-    createMultipleFlights,
-    createSingleFlight,
     getAvailableFlights,
     getAllFlights,
 };

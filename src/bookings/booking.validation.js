@@ -1,5 +1,4 @@
 const Joi = require('joi');
-const { objectId } = require("../utils/custom.validation");
 
 const createBooking = {
     body: Joi.object().keys({
@@ -9,7 +8,7 @@ const createBooking = {
         mobileNumber: Joi.number().required(),
     }),
     params: Joi.object().keys({
-      id: Joi.string().required().custom(objectId),
+      flightCode: Joi.string().required(),
   }),
 };
 
