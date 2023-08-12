@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
     res.send({ message: "Welcome to Flight Bot Backend" });
 });
 app.use("*", (req, res) => {
-    res.statusCode(404).send({ message: "Route Not found" });
+    res.status(404).send({ message: "Route Not found" });
 });
 
 app.use(errorConverter);
